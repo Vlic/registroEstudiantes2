@@ -27,17 +27,21 @@ namespace registroEstudiantes2.Data
                     roleManager.CreateAsync(role).Wait();
                 }
             }
-            if (await userManager.FindByEmailAsync("admin@gmail.com")==null)
+            if (await userManager.FindByEmailAsync("admin1@gmail.com")==null)
             {
                 ApplicationUser user = new ApplicationUser
                 {
-                    UserName = "admin@gmail.com",
-                    Email = "admin@admin.com",
+                    UserName = "admin1@gmail.com",
+                    Email = "admin1@gmail.com",
                     EmailConfirmed = true,
                     LockoutEnabled = false
                 };
 
                 IdentityResult result = userManager.CreateAsync(user, "Admin1234$").Result;
+                if(result.Succeeded)
+                {
+                    userManager.AddToRoleAsync(user, "admin").Wait();
+                }
             }
         }
     }
